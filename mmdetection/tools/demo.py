@@ -178,7 +178,10 @@ def main():
                 img_meta=DC([{'img_shape':img_shape, 'scale_factor':scale_factor, 'flip':False, 'ori_shape':ori_shape}], cpu_only=True),
                 )
             bbox_results, pred_results = model(**data_batch, return_loss=False)
-
+            print("prediction result of {image} is {res}".format(image=image,res=pred_results['pred_joints'].shape))#dim (num_people,num_joints_24,3)
+            '''
+            ['pred_rotmat', 'pred_betas', 'pred_camera', 'pred_vertices', 'pred_joints', 'pred_translation']
+            '''
             if pred_results is not None:
                 pred_results['bboxes'] = bbox_results[0]
                 img = denormalize(img)
